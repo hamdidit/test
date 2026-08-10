@@ -1,8 +1,149 @@
-<html>
-</html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-      <title> math website test</title>     
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Test</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .test-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        #question {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        #answer {
+            width: 200px;
+            padding: 12px;
+            font-size: 20px;
+            text-align: center;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        #answer:focus {
+            border-color: #555;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #333;
+            color: white;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-            
+
+    <div class="test-box">
+        <h1>Math Test</h1>
+
+        <div id="question"></div>
+
+        <input
+            type="number"
+            id="answer"
+            placeholder="Your answer"
+            autocomplete="off"
+        >
+
+        <br>
+
+        <button onclick="checkAnswer()">Check</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let num1;
+        let num2;
+        let correctAnswer;
+
+        function newQuestion() {
+            // Random numbers from 1 to 100
+            num1 = Math.floor(Math.random() * 100) + 1;
+            num2 = Math.floor(Math.random() * 100) + 1;
+
+            correctAnswer = num1 + num2;
+
+            document.getElementById("question").textContent =
+                num1 + " + " + num2 + " = __?";
+
+            document.getElementById("answer").value = "";
+            document.getElementById("result").textContent = "";
+
+            document.getElementById("answer").focus();
+        }
+
+        function checkAnswer() {
+            const userAnswer = Number(document.getElementById("answer").value);
+            const result = document.getElementById("result");
+
+            if (document.getElementById("answer").value === "") {
+                result.textContent = "Please enter an answer.";
+                return;
+            }
+
+            if (userAnswer === correctAnswer) {
+                result.textContent = "Correct! 🎉";
+
+                setTimeout(() => {
+                    newQuestion();
+                }, 800);
+            } else {
+                result.textContent = "Incorrect. Try again!";
+            }
+        }
+
+        // Press Enter to submit
+        document.getElementById("answer").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        });
+
+        // Start with a random question
+        newQuestion();
+    </script>
+
 </body>
+</html>
