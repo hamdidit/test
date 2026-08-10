@@ -97,8 +97,10 @@
         let num1;
         let num2;
         let correctAnswer;
+        let INCORRECT;
 
         function newQuestion() {
+            INCORRECT=0
             // Random numbers from 1 to 100
             num1 = Math.floor(Math.random() * 100) + 1;
             num2 = Math.floor(Math.random() * 100) + 1;
@@ -130,7 +132,12 @@
                     newQuestion();
                 }, 800);
             } else {
-                result.textContent = "Incorrect. Try again!";
+                let txet="";
+                if (INCORRECT>0) {
+                    txet="("+INCORRECT+"x)";
+                }
+                INCORRECT=INCORRECT+1
+                result.textContent = "Incorrect. Try again!"+txet;
             }
         }
 
