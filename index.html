@@ -111,27 +111,23 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function generate() {
-    const a = randomInt(-100, 150);
-    const operation = operations[randomInt(0, operations.length - 1)];
-    const b = randomInt(-150, 100);
-    if (b===0) {
-        b=7
-    }
-
-    return [a, operation, b];
-}
         
         function newQuestion() {
             INCORRECT=0
             // Random numbers from 1 to 100
-            num1 = Math.floor(Math.random() * 100) + 1;
-            num2 = Math.floor(Math.random() * 100) + 1;
+            
+    num1 = randomInt(-100, 150);
+    operation = operations[randomInt(0, operations.length - 1)];
+    num2 = randomInt(-150, 100);
+    if (num2===0) {
+        num2=7
+    }
 
-            correctAnswer = num1 + num2;
+            
+            correctAnswer = FUNCoperations[operation](num1 , num2);
 
             document.getElementById("question").textContent =
-                num1 + " + " + num2 + " = __?";
+                num1 + operation + num2 + " = __?";
 
             document.getElementById("answer").value = "";
             document.getElementById("result").textContent = "";
