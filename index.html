@@ -98,7 +98,30 @@
         let num2;
         let correctAnswer;
         let INCORRECT;
+const FUNCoperations = {
+    "+": (a, b) => a + b,
+    "-": (a, b) => a - b,
+    "x": (a, b) => a * b,
+    "/": (a, b) => Math.round((a / b) * 100) / 100
+};
 
+const operations = ["+", "x", "-", "/"];
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generate() {
+    const a = randomInt(-100, 150);
+    const operation = operations[randomInt(0, operations.length - 1)];
+    const b = randomInt(-150, 100);
+    if (b===0) {
+        b=7
+    }
+
+    return [a, operation, b];
+}
+        
         function newQuestion() {
             INCORRECT=0
             // Random numbers from 1 to 100
